@@ -3,12 +3,91 @@
 <html>
 
 <head>
+	 <style>
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #grid-item {
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            background-color: transparent;
+        }
+        input {
+            margin: 5px;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
 	<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+	<duv id="grid container" >
+		<div id="grid-item">1</div>
+        <div id="grid-item">2</div>
+        <div id="grid-item">3</div>
+        <div id="grid-item">4</div>
+        <div id="grid-item">5</div>
+        <div id="grid-item">6</div>
+        <div id="grid-item">7</div>
+        <div id="grid-item">8</div>
+        <div id="grid-item">9</div>
+	</duv>
+
+	<input type="number" id="block_id" placeholder="Enter block ID">
+    <input type="text" id="colour_id" placeholder="Enter color">
+    <button id="change_button">Change Color</button>
+    <button id="Reset">Reset</button>
+	
 	<!-- the entire body must be written by student -->
     <script type="text/javascript" src="./script.js">
+
+		const blocks = document.querySelectorAll("#grid-item");
+        const blockId = document.getElementById("block_id");
+        const colourId = document.getElementById("colour_id");
+        const changeButton = document.getElementById("change_button");
+        const resetButton = document.getElementById("Reset");
+
+        changeButton.addEventListener("click", function() {
+
+            let id = Number(blockId.value);
+            let color = colourId.value;
+
+            // First make all blocks transparent
+            for(let i = 0; i < blocks.length; i++) {
+                blocks[i].style.backgroundColor = "transparent";
+            }
+            // Check block ID
+            if(id < 1 || id > 9 || blockId.value === "") {
+                alert("Please enter ID between 1 and 9");
+                return;
+            }
+            if(color === "") {
+                alert("Please enter a color");
+                return;
+            }
+            // Change selected block color
+            blocks[id - 1].style.backgroundColor = color;
+
+        });
+        resetButton.addEventListener("click", function() {
+            for(let i = 0; i < blocks.length; i++) {
+                blocks[i].style.backgroundColor = "transparent";
+            }
+            blockId.value = "";
+            colourId.value = "";
+        });
 </script>
 
 </body>
